@@ -33,6 +33,14 @@ def mostrar_contenido():
     cursor.close()
     conexion.close()
 
+def eliminar_seleccionado():
+    # Obtener el elemento seleccionado en el Treeview
+    selected_item = tree.selection()
+
+    if selected_item:  # Si hay un elemento seleccionado
+        # Eliminar el elemento seleccionado
+        tree.delete(selected_item)   
+
 ventana = tk.Tk()
 ventana.title("Conexion DB")
 
@@ -47,11 +55,14 @@ tree.heading("ID", text="ID")
 tree.heading("Nombre", text="Nombre")
 tree.heading("Teléfono", text="Teléfono")
 
-# Empacar el widget Treeview
-tree.pack(expand=False, fill="both")
+# tree.pack(expand=True, fill="both") asegura que el widget tree se expanda tanto horizontal como verticalmente para ocupar todo el espacio disponible dentro de la ventana principal ventana
+tree.pack(expand=True, fill="both")
 
 # Agregar el botón de mostrar
 boton_mostrar = tk.Button(ventana, text="Mostrar", command=mostrar_contenido)
 boton_mostrar.pack()
+
+boton_eliminar = tk.Button(ventana, text="Eliminar", command=eliminar_seleccionado)
+boton_eliminar.pack()
 
 ventana.mainloop()
